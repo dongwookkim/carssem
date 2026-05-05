@@ -131,72 +131,8 @@ class ProfileScreen extends ConsumerWidget {
 
               const SizedBox(height: 32),
 
-              // 소식/업데이트 섹션
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '소식/업데이트',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      '차량 정비 내역을 더 쉽고 정확하게 관리할 수 있도록 정비 항목 자동 분류 기능이 업데이트되었습니다.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textPrimary,
-                        height: 1.6,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '이제 정비 내역을 입력하면 엔진·브레이크·타이어·전기/전자 등 정비 카테고리가 자동으로 분류되어 한눈에 차량 상태와...',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textPrimary,
-                        height: 1.6,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        '2026.01.07',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppColors.textHint,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 32),
-
-              // 푸터 링크
               const Divider(height: 1, color: AppColors.border),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 16,
-                ),
-                child: Row(
-                  children: [
-                    _FooterLink(text: '이용약관', onTap: () {}),
-                    const SizedBox(width: 24),
-                    _FooterLink(text: '개인정보 취급방침', onTap: () {}),
-                    const SizedBox(width: 24),
-                    _FooterLink(text: '마케팅 수신동의', onTap: () {}),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 16),
 
               // 카피라이트
               Padding(
@@ -241,24 +177,3 @@ class ProfileScreen extends ConsumerWidget {
 
 }
 
-class _FooterLink extends StatelessWidget {
-  final String text;
-  final VoidCallback onTap;
-
-  const _FooterLink({required this.text, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 13,
-          color: AppColors.textSecondary,
-          decoration: TextDecoration.underline,
-        ),
-      ),
-    );
-  }
-}

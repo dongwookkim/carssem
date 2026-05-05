@@ -259,14 +259,11 @@ class MaintenanceDetailScreen extends ConsumerWidget {
                     return Padding(
                       padding: EdgeInsets.only(bottom: idx < groupedItems.length - 1 ? 40 : 0),
                       child: _buildCategorySection(
-                        context: context,
                         index: idx + 1,
                         title: category,
                         items: items,
                         subtotal: subtotal,
                         numberFormat: numberFormat,
-                        date: record.date,
-                        mileage: record.mileage,
                       ),
                     );
                   }),
@@ -366,54 +363,29 @@ class MaintenanceDetailScreen extends ConsumerWidget {
   }
 
   Widget _buildCategorySection({
-    required BuildContext context,
     required int index,
     required String title,
     required List<MaintenanceItemModel> items,
     required int subtotal,
     required NumberFormat numberFormat,
-    required DateTime date,
-    required int mileage,
   }) {
     final sectionTitle = '${index.toString().padLeft(2, '0')}. $title';
 
     return Column(
       children: [
         // Section header
-        GestureDetector(
-          onTap: () => context.push('/work-description', extra: {
-            'system': title,
-            'items': items,
-            'date': date,
-            'mileage': mileage,
-          }),
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 9),
-            decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: _textDark)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  sectionTitle,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
-                    color: _textDark,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: const BoxDecoration(
-                    color: _textDark,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.chevron_right, size: 14, color: Colors.white),
-                ),
-              ],
+        Container(
+          padding: const EdgeInsets.only(bottom: 9),
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: _textDark)),
+          ),
+          child: Text(
+            sectionTitle,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+              color: _textDark,
+              letterSpacing: -0.28,
             ),
           ),
         ),

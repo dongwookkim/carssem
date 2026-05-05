@@ -49,16 +49,14 @@ class MaintenanceListScreen extends ConsumerWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              GestureDetector(
-                onTap: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(Icons.menu, size: 18, color: AppColors.textPrimary),
-                ),
+              IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(Icons.menu, size: 24, color: AppColors.textPrimary),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                visualDensity: VisualDensity.compact,
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 4),
               const Text(
                 'carssem',
                 style: TextStyle(

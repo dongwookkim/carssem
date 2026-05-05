@@ -52,25 +52,6 @@ class _AppDrawer extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
-                      // TODO: 복원 기능 연결
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
-                        '정비·수리내역 복원',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF1F2937),
-                          height: 1.4,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
                       context.push('/profile');
                     },
                     child: const Padding(
