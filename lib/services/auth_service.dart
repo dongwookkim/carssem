@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../core/constants/app_constants.dart';
 import 'device_service.dart';
 import 'supabase_service.dart';
 
@@ -75,13 +76,30 @@ class AuthService {
     await _client.auth.signOut();
   }
 
-  /// 회원 탈퇴: 사용자 데이터 삭제 후 로그아웃
+  /// 회원 탈퇴: Edge Function으로 스토리지·계정·연관 데이터 일괄 삭제 후 로그아웃.
+  /// service_role 권한이 필요하므로 클라이언트가 아니라 Edge Function에서 처리한다.
   Future<void> deleteAccount() async {
-    final userId = currentUser?.id;
-    if (userId == null) return;
+    if (currentUser == null) {
+      throw StateError('로그인 상태가 아닙니다');
+    }
 
-    await _client.from('users').delete().eq('id', userId);
-    await _client.auth.signOut();
+    final response = await _client.functions.invoke(
+      AppConstants.deleteAccountFunction,
+    );
+
+    if (response.status != 200) {
+      final message = (response.data is Map && response.data['error'] != null)
+          ? response.data['error'].toString()
+          : '계정 삭제에 실패했습니다 (status=${response.status})';
+      throw Exception(message);
+    }
+
+    try {
+      await _client.auth.signOut();
+    } catch (e) {
+      // auth.users는 이미 삭제된 상태이므로 signOut이 실패할 수 있다 — 무시.
+      debugPrint('[AuthService] signOut after delete: $e');
+    }
   }
 
   Future<void> updateProfile({String? name, String? profileImage}) async {

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/force_update_dialog.dart';
+import '../../../providers/app_version_provider.dart';
 import '../../../providers/auth_provider.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -24,6 +26,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 1500));
 
     if (!mounted) return;
+
+    // 강제 업데이트 체크 (네트워크/DB 오류 시 통과 — 락아웃 방지)
+    final updateState = await ref.read(forceUpdateCheckProvider.future);
+    if (!mounted) return;
+    if (updateState.required) {
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => ForceUpdateDialog(
+          message: updateState.info?.updateMessage,
+        ),
+      );
+      return;
+    }
 
     try {
       // Device ID 기반 자동 인증

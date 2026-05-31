@@ -13,6 +13,7 @@ import '../../features/maintenance/screens/maintenance_detail_screen.dart';
 import '../../features/maintenance/screens/work_description_screen.dart';
 import '../../models/maintenance_item_model.dart';
 import '../../features/profile/screens/profile_screen.dart';
+import '../../features/settings/screens/settings_screen.dart';
 import '../../features/garage/screens/garage_screen.dart';
 import '../../features/garage/screens/garage_detail_screen.dart';
 import '../../features/garage/screens/region_search_screen.dart';
@@ -61,6 +62,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const ProfileScreen(),
+          ),
+          GoRoute(
+            path: '/settings',
+            builder: (context, state) => const SettingsScreen(),
           ),
         ],
       ),

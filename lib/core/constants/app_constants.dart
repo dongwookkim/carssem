@@ -11,6 +11,7 @@ class AppConstants {
 
   // Edge Functions
   static const String analyzeReceiptFunction = 'analyze-receipt';
+  static const String deleteAccountFunction = 'delete-account';
 
   // Maintenance Categories
   static const String categoryParts = '부품';
