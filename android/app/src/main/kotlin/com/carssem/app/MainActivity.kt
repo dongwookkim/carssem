@@ -1,4 +1,4 @@
-package com.carssem.carssem
+package com.carssem.app
 
 import io.flutter.embedding.android.FlutterActivity
 
