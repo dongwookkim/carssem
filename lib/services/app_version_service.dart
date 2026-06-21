@@ -11,7 +11,7 @@ class AppVersionService {
   AppVersionService._();
   static final AppVersionService instance = AppVersionService._();
 
-  static const String _androidPackageFallback = 'com.carssem.carssem';
+  static const String _androidPackageFallback = 'com.carssem.app';
 
   String get _platformKey => Platform.isIOS ? 'ios' : 'android';
 
